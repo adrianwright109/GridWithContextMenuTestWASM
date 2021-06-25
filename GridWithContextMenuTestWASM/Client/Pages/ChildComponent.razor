@@ -1,0 +1,82 @@
+﻿
+<TelerikGrid Data="@MyData" Height="400px"
+             Pageable="true" Sortable="true" Groupable="true"
+             FilterMode="Telerik.Blazor.GridFilterMode.FilterRow"
+             Resizable="true" Reorderable="true">
+    <GridColumns>
+        <GridColumn Field="@(nameof(SampleData.Id))" Width="120px" />
+        <GridColumn Field="@(nameof(SampleData.Name))" Title="Employee Name" Groupable="false" />
+        <GridColumn Field="@(nameof(SampleData.Team))" Title="Team" />
+        <GridColumn Field="@(nameof(SampleData.HireDate))" Title="Hire Date" />
+        <GridColumn Width="60px" Filterable="false" Groupable="false" Reorderable="false" Locked="true">
+            <Template>
+                <span @onclick:stopPropagation="true">
+                    <TelerikButton Primary="true" OnClick="@((MouseEventArgs e) => ShowContextMenuOptionsForRow(e, context as SampleData))" Icon="more-vertical"></TelerikButton>
+                </span>
+            </Template>
+        </GridColumn>
+    </GridColumns>
+</TelerikGrid>
+
+<TelerikContextMenu @ref="@ContextMenuRef" Data="@MenuItems" ></TelerikContextMenu>
+
+@code {
+
+    private bool _shouldRender = true;
+    protected override bool ShouldRender()
+    {
+        return _shouldRender;
+    }
+
+
+    public Telerik.Blazor.Components.TelerikContextMenu<TelerikGridContextMenuItem> ContextMenuRef { get; set; }
+
+    public List<TelerikGridContextMenuItem> MenuItems { get; set; }
+
+    public class TelerikGridContextMenuItem
+    {
+        public string Text { get; set; }
+        public string Icon { get; set; }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //if (IsEnvironmentSet())
+        //{
+        MenuItems = new List<TelerikGridContextMenuItem>
+            {
+            new() { Text = "Edit Tyre", Icon = "edit" }
+            };
+
+        await base.OnInitializedAsync();
+
+        //}
+    }
+
+    protected async Task ShowContextMenuOptionsForRow(MouseEventArgs e, SampleData row)
+    {
+        //_shouldRender = false;
+
+        var SelectedRowInfo = row;
+
+        await ContextMenuRef.ShowAsync(e.ClientX, e.ClientY);
+
+        //_shouldRender = true;
+    }
+
+    public IEnumerable<SampleData> MyData = Enumerable.Range(1, 30).Select(x => new SampleData
+    {
+        Id = x,
+        Name = "name " + x,
+        Team = "team " + x % 5,
+        HireDate = DateTime.Now.AddDays(-x).Date
+    });
+
+    public class SampleData
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Team { get; set; }
+        public DateTime HireDate { get; set; }
+    }
+}

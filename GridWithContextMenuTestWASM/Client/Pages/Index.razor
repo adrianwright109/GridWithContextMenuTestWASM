@@ -1,0 +1,19 @@
+﻿@page "/"
+
+@using Telerik.Blazor.Components
+
+<TelerikTabStrip TabPosition="Telerik.Blazor.TabPosition.Left" @ref="myTabStrip">
+    <TabStripTab Title="Tab with Grid">
+        <ChildComponent></ChildComponent>
+    </TabStripTab>
+    <TabStripTab Title="Second" Disabled="true">
+        Second tab content. This tab is disabled and you cannot select it.
+    </TabStripTab>
+    <TabStripTab Title="Third">
+        Third tab content.
+    </TabStripTab>
+</TelerikTabStrip>
+
+@code {
+    Telerik.Blazor.Components.TelerikTabStrip myTabStrip;
+}
