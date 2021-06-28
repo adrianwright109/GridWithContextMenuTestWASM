@@ -1,16 +1,13 @@
 ﻿@page "/"
-
-@using Telerik.Blazor.Components
-
-<TelerikTabStrip TabPosition="Telerik.Blazor.TabPosition.Left" @ref="myTabStrip">
-    <TabStripTab Title="Tab with Grid">
-        <ChildComponent></ChildComponent>
+<TelerikTabStrip TabPosition="TabPosition.Left" @ref="myTabStrip">
+    <TabStripTab Title="Grid with 1000 records - no paging">
+        <GridWithNoPaging></GridWithNoPaging>
     </TabStripTab>
-    <TabStripTab Title="Second" Disabled="true">
-        Second tab content. This tab is disabled and you cannot select it.
+    <TabStripTab Title="Grid with 1000 records - 100 rows per page - column definitions inline">
+        <GridWithPagingAndColumnDefinitionsInline></GridWithPagingAndColumnDefinitionsInline>
     </TabStripTab>
-    <TabStripTab Title="Third">
-        Third tab content.
+    <TabStripTab Title="Grid with 1000 records - 100 rows per page - column definitions in another component">
+        <GridWithPagingAndColumnDefinitionsInAnotherComponent></GridWithPagingAndColumnDefinitionsInAnotherComponent>
     </TabStripTab>
 </TelerikTabStrip>
 

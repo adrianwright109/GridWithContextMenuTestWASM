@@ -1,0 +1,41 @@
+﻿@using Telerik.DataSource
+@using Telerik.DataSource.Extensions
+@using GridWithContextMenuTestWASM.Client.DTOs
+@using GridWithContextMenuTestWASM.Client.Abstract
+@inherits GridWithNoPagingBase
+
+<TelerikLoaderContainer OverlayThemeColor="light" Visible="@(IsRefreshingGrid)" Text="@null" Class="initial-data-loader">
+    <Template>
+        <TelerikLoader Type="@LoaderType.InfiniteSpinner" Size="@LoaderSize.Large"></TelerikLoader>
+    </Template>
+</TelerikLoaderContainer>
+
+<TelerikContextMenu @ref="@ContextMenuRef" Data="@MenuItems" OnClick="@((TelerikGridContextMenuItem item) => OnContextMenuItemClick(item))"></TelerikContextMenu>
+
+<TelerikGrid @ref="GridRef"
+                  Data="@CurrentGridData"
+                  Height="500px"
+                  Sortable="true"
+                  Groupable="false"
+                  FilterMode="GridFilterMode.FilterMenu"
+                  Resizable="true"
+                  Reorderable="true"
+                  Pageable="false"
+                  TotalCount="@TotalCount" 
+                  OnRead="@OnReadHandler"
+                  RowHeight="20">
+    <GridColumns>
+        <GridColumn Field="@(nameof(SampleData.Id))" Width="120px" />
+        <GridColumn Field="@(nameof(SampleData.Name))" Title="Employee Name" Groupable="false" />
+        <GridColumn Field="@(nameof(SampleData.Team))" Title="Team" />
+        <GridColumn Field="@(nameof(SampleData.HireDate))" Title="Hire Date" />
+        <GridColumn Width="60px" Filterable="false" Groupable="false" Reorderable="false" Locked="true">
+            <Template>
+                <span @onclick:stopPropagation="true">
+                    <TelerikButton Primary="true" OnClick="@((MouseEventArgs e) => ShowContextMenuOptionsForRow(e, context as SampleDataType1))" Icon="more-vertical"></TelerikButton>
+                </span>
+            </Template>
+        </GridColumn>
+    </GridColumns>
+</TelerikGrid>
+@SlideInRenderFragment

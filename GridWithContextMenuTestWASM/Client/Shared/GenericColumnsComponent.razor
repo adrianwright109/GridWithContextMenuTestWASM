@@ -1,0 +1,15 @@
+﻿@using GridWithContextMenuTestWASM.Client.DTOs
+@using GridWithContextMenuTestWASM.Client.Abstract
+@typeparam TRowInfoType
+
+<GridColumn Field="@(nameof(SampleData.Id))" Width="120px" />
+<GridColumn Field="@(nameof(SampleData.Name))" Title="Employee Name" Groupable="false" />
+<GridColumn Field="@(nameof(SampleData.Team))" Title="Team" />
+<GridColumn Field="@(nameof(SampleData.HireDate))" Title="Hire Date" />
+<GridColumn Width="60px" Filterable="false" Groupable="false" Reorderable="false" Locked="true">
+    <Template>
+        <span @onclick:stopPropagation="true">
+            <TelerikButton Primary="true" @onclick="@(e => OnContextMenuClick.InvokeAsync((e, context as TRowInfoType)))" Icon="more-vertical"></TelerikButton>
+        </span>
+    </Template>
+</GridColumn>

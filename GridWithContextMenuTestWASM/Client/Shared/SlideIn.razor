@@ -1,0 +1,22 @@
+﻿<TelerikAnimationContainer @ref="_slideInRef"
+                           Width="@Options.Width"
+                           ParentClass="slide-in"
+                           AnimationType="AnimationType.SlideLeft"
+                           AnimationDuration="600"
+                           HideDelay="20"
+                           ShowDelay="20"
+                           Class="slidetest">
+
+    <div class="slide-in-content">
+        <div class="slide-in-header">
+            <h5>@Title</h5>
+            <span class="blazor-close-button" @onclick="CancelAsync">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </span>
+        </div>
+        <CascadingValue Value="this">
+            @ChildContent
+        </CascadingValue>
+    </div>
+
+</TelerikAnimationContainer>

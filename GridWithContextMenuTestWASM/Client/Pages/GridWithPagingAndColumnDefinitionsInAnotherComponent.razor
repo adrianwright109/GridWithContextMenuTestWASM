@@ -1,0 +1,33 @@
+﻿@using GridWithContextMenuTestWASM.Client.Abstract
+@using Telerik.DataSource
+@using Telerik.DataSource.Extensions
+@using GridWithContextMenuTestWASM.Client.DTOs
+@inherits GridWithPagingAndColumnDefinitionsInAnotherComponentBase
+
+<TelerikLoaderContainer OverlayThemeColor="light" Visible="@(IsRefreshingGrid)" Text="@null" Class="initial-data-loader">
+    <Template>
+        <TelerikLoader Type="@LoaderType.InfiniteSpinner" Size="@LoaderSize.Large"></TelerikLoader>
+    </Template>
+</TelerikLoaderContainer>
+
+<TelerikContextMenu @ref="@ContextMenuRef" Data="@MenuItems" OnClick="@((TelerikGridContextMenuItem item) => OnContextMenuItemClick(item))"></TelerikContextMenu>
+
+<TelerikGrid @ref="GridRef"
+              Data="@CurrentGridData"
+              Height="500px"
+              Sortable="true"
+              Groupable="false"
+              FilterMode="GridFilterMode.FilterMenu"
+              Resizable="true"
+              Reorderable="true"
+              Pageable="true"
+              TotalCount="@TotalCount" 
+              OnRead="@OnReadHandler"
+              RowHeight="20">
+    <GridColumns>
+        <GenericColumnsComponent 
+            TRowInfoType="SampleDataType3"
+            OnContextMenuClick="ContextMenuClick" />
+    </GridColumns>
+</TelerikGrid>
+@SlideInRenderFragment

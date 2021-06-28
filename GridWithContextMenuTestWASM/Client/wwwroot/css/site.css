@@ -181,3 +181,84 @@ a, .btn-link {
         display: block;
     }
 }
+
+.slidetest {
+    padding-left: 32px;
+    background: linear-gradient( 90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 5%, rgba(0,0,0,0.4) 10%, rgba(0,0,0,0.20) 20%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,1) 100%);
+}
+
+
+.slide-in {
+    top: 55px;
+    right: 0;
+    margin-top: -55px;
+    z-index: 10000000;
+    /*   box-shadow: 0 50px 55px 0 rgb(0 0 0 / 30%), 0 1px 15px 0 rgb(0 0 0 / 10%);*/
+}
+
+
+
+
+
+
+.slide-in-content {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid #e3e5e8;
+    position: fixed;
+    right: -16px;
+    width: 1060px;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+.slide-in-header, .slide-in-actions {
+    line-height: 26px;
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    padding: 1rem;
+    background-color: #0A263B;
+}
+
+.slide-in-header {
+    background-color: #fff;
+    border-bottom: 1px solid #e3e5e8;
+    color: #313c53;
+    font-weight: 500;
+    border-left: 1px solid #e3e5e8;
+    display: inline;
+    margin-top: 6px;
+}
+
+.slide-in-body {
+    display: block;
+    position: relative;
+    /* Enable `flex-grow: 1` so that the body take up as much space as possible 
+        when should there be a fixed height on `.modal-dialog`. */
+    flex: 1 1 auto;
+    padding: 1rem;
+    background-color: #ffffff;
+    height: calc(100vh - 90px);
+}
+
+.slide-in-actions {
+    color: black;
+    background-color: white;
+    border-top: 1px solid #e3e5e8;
+    text-align: right;
+    position: fixed;
+    bottom: 0;
+    width: 1043px;
+    right: 0;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    box-shadow: 0px 2px 16px rgba(63, 63, 68, 0.15);
+}
+
+.blazor-close-button {
+    float: right;
+    margin: 5px;
+    cursor: pointer;
+    margin-top: -35px;
+}
